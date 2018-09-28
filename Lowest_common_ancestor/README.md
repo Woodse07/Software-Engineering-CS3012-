@@ -1,3 +1,3 @@
-##First Assignment
+## First Assignment
 <p>To run tests:</p>
-- Run python test.py
+1. Run python test.py
