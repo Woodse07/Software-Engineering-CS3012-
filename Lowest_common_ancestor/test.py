@@ -63,6 +63,19 @@ class myTest(unittest.TestCase):
         G = 5.4
         self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
 
+    def test_node_exists(self):
+        #Creating graph with networkx library..
+        G = nx.DiGraph()
+        #Adding random nodes..
+        G.add_nodes_from(['a','b','b','d','e','f','g','h','i','j','k','l','m','n','o','p'])
+        #Adding random edges..
+        G.add_edges_from([('a','b'),('a','c'),('b','d'),('b','e'),('c','f'),('c','g'),('d','h'),
+                            ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
+
+        self.assertEqual(lowest_common_ancestor(G, 1, 2), None)
+        self.assertEqual(lowest_common_ancestor(G, 'x', 'z'), None)
+        self.assertEqual(lowest_common_ancestor(G, 'w', 'y'), None)
+
 
 
 if __name__ == '__main__':

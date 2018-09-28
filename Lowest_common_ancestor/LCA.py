@@ -3,6 +3,7 @@ import networkx as nx
 #Start functions
 def lowest_common_ancestor(graph, a, b):
     if(not isinstance(graph, nx.DiGraph)):
+        print("First parameter is expected to be a networkx Digraph.")
         return None
 
     if(len(graph) == 0):
@@ -10,6 +11,13 @@ def lowest_common_ancestor(graph, a, b):
         return None
     elif(len(graph) == 1):
         print("Graph size 1.. ")
+        return None
+
+    if(not graph.has_node(a)):
+        print(str(a) + " does not exist in the graph.")
+        return None
+    elif(not graph.has_node(b)):
+        print(str(b) + " does not exist in the graph.")
         return None
 
     ancestorsA = nx.ancestors(graph, a)
