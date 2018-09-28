@@ -19,9 +19,11 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor(G, 'h', 'c'), 'a')          #              /  \      /  \
         self.assertEqual(lowest_common_ancestor(G, 'i', 'l'), 'b')          #             d   e     f    g
         self.assertEqual(lowest_common_ancestor(G, 'i', 'j'), 'd')          #           / \  /\    /     \
-                                                                            #          h  j k  l  m       o
-                                                                            #         /          /         \
-    def test_special_lca(self):                                             #        i          n           p
+        self.assertEqual(lowest_common_ancestor(G, 'i', 'd'), 'd')          #          h  j k  l  m       o
+        self.assertEqual(lowest_common_ancestor(G, 'p', 'c'), 'c')          #         /          /         \
+                                                                            #        i          n           p
+
+    def test_special_lca(self):
         #Creating graph with networkx library..
         G = nx.DiGraph()
         #Adding random nodes..

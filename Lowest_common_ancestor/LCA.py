@@ -9,6 +9,19 @@ def lowest_common_ancestor(graph, a, b):
         print("Graph size 1.. ")
         return None
 
+    ancestorsA = nx.ancestors(graph, a)
+    ancestorsB = nx.ancestors(graph, b)
+    setA = set()
+    setA.add(a)
+    setB = set()
+    setB.add(b)
+    if(bool(ancestorsB.intersection(setA))):
+        lca = a
+        return lca
+    if(bool(ancestorsA.intersection(setB))):
+        lca = b
+        return lca
+
     print("Node A: " + a)
     print("Node B: " + b)
     lca = None
