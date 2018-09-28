@@ -5,4 +5,4 @@
 
 
 **To run tests:**
-1.  Run python test.py
+1.  Run 'python test.py'
