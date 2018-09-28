@@ -34,5 +34,6 @@ def lowest_common_ancestor(graph, a, b):
         lca = intersec.pop()
 
     print("Lowest common ancestor of " + a + " and " + b + " is: " + str(lca) + "!")
+    print("")       
     return lca
 #End functions
