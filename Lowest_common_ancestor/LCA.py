@@ -2,6 +2,9 @@ import networkx as nx
 
 #Start functions
 def lowest_common_ancestor(graph, a, b):
+    if(not isinstance(graph, nx.DiGraph)):
+        return None
+
     if(len(graph) == 0):
         print("This is an empty graph!")
         return None

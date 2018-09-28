@@ -50,6 +50,18 @@ class myTest(unittest.TestCase):
         G.add_node('x')
         self.assertEqual(lowest_common_ancestor(G,'x','x'), None)
 
+    def test_wrong_parameters(self):
+        G = "Hello World"
+        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+
+        G = 7
+        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+
+        G = [1, 2, 3]
+        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+
+        G = 5.4
+        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
 
 
 
