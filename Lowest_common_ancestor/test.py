@@ -42,6 +42,13 @@ class myTest(unittest.TestCase):
         G = nx.DiGraph()
         self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
 
+    def test_singleton_graph(self):
+        #Creating singleton graph with networkx library..
+        G = nx.DiGraph()
+        G.add_node('x')
+        self.assertEqual(lowest_common_ancestor(G,'x','x'), None)
+
+
 
 
 if __name__ == '__main__':
