@@ -2,6 +2,10 @@ import networkx as nx
 
 #Start functions
 def lowest_common_ancestor(graph, a, b):
+    if(len(graph) == 0):
+        print("This is an empty graph!")
+        return None
+
     print("Node A: " + a)
     print("Node B: " + b)
     lca = None
