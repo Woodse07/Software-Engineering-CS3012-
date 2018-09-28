@@ -2,7 +2,20 @@ import networkx as nx
 
 #Start functions
 def lowest_common_ancestor(graph, a, b):
+    print("Node A: " + a)
+    print("Node B: " + b)
     lca = None
+    if(a == b):
+        lca = a
+        print("Lowest common ancestor of " + a + " and " + b + " is: " + str(lca) + "!")
+        print("")
+        return lca
+
+    if(nx.topological_sort(graph).next() == a):
+        lca = a
+        print("Lowest common ancestor of " + a + " and " + b + " is: " + str(lca) + "!")
+        print("")
+        return lca
 
     node_a_parents = set()
     finished = 0
@@ -34,6 +47,6 @@ def lowest_common_ancestor(graph, a, b):
         lca = intersec.pop()
 
     print("Lowest common ancestor of " + a + " and " + b + " is: " + str(lca) + "!")
-    print("")       
+    print("")
     return lca
 #End functions
