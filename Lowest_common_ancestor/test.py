@@ -76,6 +76,21 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor(G, 'x', 'z'), None)
         self.assertEqual(lowest_common_ancestor(G, 'w', 'y'), None)
 
+    def test_directed_acyclic(self):                                                            #           _a_
+        #Creating graph with networkx library..                                                 #         /    \
+        G = nx.DiGraph()                                                                        #        b      c
+        #Adding random nodes                                                                    #        |      |
+        G.add_nodes_from(['a','b','c','d','e','f'])                                             #        d      e
+        #Adding random edges                                                                    #         \    /
+        G.add_edges_from([('a','b'),('a','c'),('b','d'),('c','e'),('d','f'),('e','f')])         #           f
+
+        #Testing acyclic
+        self.assertTrue(nx.is_directed_acyclic_graph)
+        self.assertEqual(lowest_common_ancestor(G, 'f', 'b'), 'b')
+        self.assertEqual(lowest_common_ancestor(G, 'd', 'e'), 'a')
+        self.assertEqual(lowest_common_ancestor(G, 'a', 'a'), 'a')
+        self.assertEqual(lowest_common_ancestor(G, 'd', 'c'), 'a')
+        self.assertEqual(lowest_common_ancestor(G, 'f', 'f'), 'f')
 
 
 if __name__ == '__main__':
