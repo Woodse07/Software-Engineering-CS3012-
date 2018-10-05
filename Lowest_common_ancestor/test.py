@@ -1,6 +1,7 @@
 import unittest
 import networkx as nx
 from LCA import lowest_common_ancestor
+from LCA_binary_tree import Node
 
 class myTest(unittest.TestCase):
     def test_general_lca(self):
@@ -92,6 +93,13 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor(G, 'd', 'c'), 'a')
         self.assertEqual(lowest_common_ancestor(G, 'f', 'f'), 'f')
 
+    def test_binary_tree(self):
+        BT = Node(10)
+        BT.insert(5)
+        BT.insert(15)
+        self.assertEqual(BT.data, 10)
+        self.assertEqual(BT.left.data, 5)
+        self.assertEqual(BT.right.data, 15)
 
 if __name__ == '__main__':
     unittest.main()
