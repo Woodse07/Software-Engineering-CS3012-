@@ -13,7 +13,7 @@ class myTest(unittest.TestCase):
         G.add_edges_from([('a','b'),('a','c'),('b','d'),('b','e'),('c','f'),('c','g'),('d','h'),
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
-        #General cases (Random nodes for testing)                           #       Graphic of the binary tree
+        #General cases (Random nodes for testing)                           #       Graphic of the is_directed_acyclic_graph
         self.assertEqual(lowest_common_ancestor(G, 'p', 'i'), 'a')          #                  _a_
         self.assertEqual(lowest_common_ancestor(G, 'n', 'o'), 'c')          #                /    \__
         self.assertEqual(lowest_common_ancestor(G, 'b', 'c'), 'a')          #                b       c__
@@ -100,6 +100,11 @@ class myTest(unittest.TestCase):
         self.assertEqual(BT.data, 10)
         self.assertEqual(BT.left.data, 5)
         self.assertEqual(BT.right.data, 15)
+
+        BT.insert(25)
+        BT.insert(2)
+        self.assertEqual(BT.left.left.data, 2)
+        self.assertEqual(BT.right.right.data, 25)
 
 if __name__ == '__main__':
     unittest.main()
