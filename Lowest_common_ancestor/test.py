@@ -1,6 +1,8 @@
 import unittest
 import networkx as nx
 from LCA_directed_acyclic_graph import lowest_common_ancestor_DAG
+from LCA_binary_tree import lowest_common_ancestor_BT
+from LCA_binary_tree import parent
 from binary_tree import Node
 
 class myTest(unittest.TestCase):
@@ -14,14 +16,14 @@ class myTest(unittest.TestCase):
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
         #General cases (Random nodes for testing)                           #       Graphic of the is_directed_acyclic_graph
-        self.assertEqual(lowest_common_ancestor(G, 'p', 'i'), 'a')          #                  _a_
-        self.assertEqual(lowest_common_ancestor(G, 'n', 'o'), 'c')          #                /    \__
-        self.assertEqual(lowest_common_ancestor(G, 'b', 'c'), 'a')          #                b       c__
-        self.assertEqual(lowest_common_ancestor(G, 'h', 'c'), 'a')          #              /  \      /  \
-        self.assertEqual(lowest_common_ancestor(G, 'i', 'l'), 'b')          #             d   e     f    g
-        self.assertEqual(lowest_common_ancestor(G, 'i', 'j'), 'd')          #           / \  /\    /     \
-        self.assertEqual(lowest_common_ancestor(G, 'i', 'd'), 'd')          #          h  j k  l  m       o
-        self.assertEqual(lowest_common_ancestor(G, 'p', 'c'), 'c')          #         /          /         \
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'p', 'i'), 'a')          #                  _a_
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'n', 'o'), 'c')          #                /    \__
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'b', 'c'), 'a')          #                b       c__
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'h', 'c'), 'a')          #              /  \      /  \
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'i', 'l'), 'b')          #             d   e     f    g
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'i', 'j'), 'd')          #           / \  /\    /     \
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'i', 'd'), 'd')          #          h  j k  l  m       o
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'p', 'c'), 'c')          #         /          /         \
                                                                             #        i          n           p
 
     def test_special_lca(self):
@@ -34,35 +36,35 @@ class myTest(unittest.TestCase):
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
         #Special cases (if one of the nodes is root, the LCA is the root)
-        self.assertEqual(lowest_common_ancestor(G, 'a', 'b'), 'a')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'a', 'b'), 'a')
         #LCA of nodes x and x is x
-        self.assertEqual(lowest_common_ancestor(G, 'a', 'a'), 'a')
-        self.assertEqual(lowest_common_ancestor(G, 'd', 'd'), 'd')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'a', 'a'), 'a')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'd', 'd'), 'd')
 
 
     def test_empty_graph(self):
         #Creating empty graph with networkx library..
         G = nx.DiGraph()
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'x'), None)
 
     def test_singleton_graph(self):
         #Creating singleton graph with networkx library..
         G = nx.DiGraph()
         G.add_node('x')
-        self.assertEqual(lowest_common_ancestor(G,'x','x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G,'x','x'), None)
 
     def test_wrong_parameters(self):
         G = "Hello World"
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'x'), None)
 
         G = 7
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'x'), None)
 
         G = [1, 2, 3]
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'x'), None)
 
         G = 5.4
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'x'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'x'), None)
 
     def test_node_exists(self):
         #Creating graph with networkx library..
@@ -73,9 +75,9 @@ class myTest(unittest.TestCase):
         G.add_edges_from([('a','b'),('a','c'),('b','d'),('b','e'),('c','f'),('c','g'),('d','h'),
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
-        self.assertEqual(lowest_common_ancestor(G, 1, 2), None)
-        self.assertEqual(lowest_common_ancestor(G, 'x', 'z'), None)
-        self.assertEqual(lowest_common_ancestor(G, 'w', 'y'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 1, 2), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'z'), None)
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'w', 'y'), None)
 
     def test_directed_acyclic(self):                                                            #           _a_
         #Creating graph with networkx library..                                                 #         /    \
@@ -87,11 +89,11 @@ class myTest(unittest.TestCase):
 
         #Testing acyclic
         self.assertTrue(nx.is_directed_acyclic_graph)
-        self.assertEqual(lowest_common_ancestor(G, 'f', 'b'), 'b')
-        self.assertEqual(lowest_common_ancestor(G, 'd', 'e'), 'a')
-        self.assertEqual(lowest_common_ancestor(G, 'a', 'a'), 'a')
-        self.assertEqual(lowest_common_ancestor(G, 'd', 'c'), 'a')
-        self.assertEqual(lowest_common_ancestor(G, 'f', 'f'), 'f')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'f', 'b'), 'b')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'd', 'e'), 'a')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'a', 'a'), 'a')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'd', 'c'), 'a')
+        self.assertEqual(lowest_common_ancestor_DAG(G, 'f', 'f'), 'f')
 
     def test_binary_tree(self):
         BT = Node(10)
@@ -105,6 +107,18 @@ class myTest(unittest.TestCase):
         BT.insert(2)
         self.assertEqual(BT.left.left.data, 2)
         self.assertEqual(BT.right.right.data, 25)
+
+    def test_parent_function(self):
+        BT = Node(10)
+        BT.insert(5)
+        BT.insert(15)
+        self.assertEqual(parent(BT, BT.left), BT)
+
+        BT.insert(2)
+        BT.insert(1)
+        self.assertEqual(parent(BT, BT.left.left), BT.left)
+        self.assertEqual(parent(BT, BT.left.left.left), BT.left.left)
+
 
 if __name__ == '__main__':
     unittest.main()
