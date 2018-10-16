@@ -1,6 +1,6 @@
 import unittest
 import networkx as nx
-from LCA_dag import lowest_common_ancestor
+from LCA_directed_acyclic_graph import lowest_common_ancestor_DAG
 from binary_tree import Node
 
 class myTest(unittest.TestCase):
