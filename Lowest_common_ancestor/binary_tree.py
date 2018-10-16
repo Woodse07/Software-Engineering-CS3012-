@@ -23,18 +23,10 @@ class Node:
 
 
     def printTree(self):
+        print("("),
         if self.left:
             self.left.printTree()
         print(self.data),
         if self.right:
             self.right.printTree()
-
-# Function definintions end here
-
-
-root = Node(10)
-root.insert(5)
-root.insert(7)
-root.insert(15)
-root.insert(12)
-root.printTree()
+        print(")"),

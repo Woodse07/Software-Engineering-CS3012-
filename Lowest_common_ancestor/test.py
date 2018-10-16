@@ -1,7 +1,7 @@
 import unittest
 import networkx as nx
-from LCA import lowest_common_ancestor
-from LCA_binary_tree import Node
+from LCA_dag import lowest_common_ancestor
+from binary_tree import Node
 
 class myTest(unittest.TestCase):
     def test_general_lca(self):
