@@ -1,3 +1,4 @@
+from LCA_binary_tree import parent
 class Node:
 
     def __init__(self, data):
@@ -30,3 +31,12 @@ class Node:
         if self.right:
             self.right.printTree()
         print(")"),
+
+
+BT = Node(10)
+BT.insert(5)
+BT.insert(15)
+BT.insert(2)
+BT.insert(1)
+print(parent(BT, BT.left.left).data)
+print(parent(BT, BT.left.left.left).data)

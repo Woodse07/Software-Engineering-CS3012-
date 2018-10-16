@@ -22,18 +22,24 @@ def lowest_common_ancestor_BT(binary_tree, node_a, node_b):
         for i in range(0, countB-countA):
             hold_b = parent(binary_tree, hold_b)
 
-    while hold_a != hold_b:
+    while hold_a is not hold_b:
         hold_a = parent(binary_tree, hold_a)
         hold_b = parent(binary_tree, hold_b)
 
 
 def parent(root, node):
-    if(root.data == node.data):
+    print("root: " + str(root.data))
+    if root.data is node.data:
         return None
     else:
-        if root.left.data == node.data or root.right.data == node.data:
+
+        if root.left is not None and root.left.data is node.data:
             return root
+        elif root.right is not None and root.right.data is node.data:
+            return root
+
         else:
+            print("here")
             if root.data < node.data:
                 return parent(root.right, node)
             else:
