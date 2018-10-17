@@ -123,12 +123,22 @@ class myTest(unittest.TestCase):
         BT = Node(50)                  #                50
         BT.insert(25)                  #               /  \
         BT.insert(75)                  #             25   75
-        BT.insert(30)                  #            / \   / \
-        BT.insert(100)                 #           0  30 60 100
-        BT.insert(80)                  #            \       /
-        BT.insert(20)                  #             20    80
+        BT.insert(60)                  #            / \   / \
+        BT.insert(100)                 #          20  30 60 100
+        BT.insert(80)                  #                    /
+        BT.insert(20)                  #                  80
         BT.insert(30)
+
         self.assertEqual(lowest_common_ancestor_BT(BT, BT.left, BT.right).data, 50)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT).data, 50)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT.right).data, 50)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left, BT).data, 50)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left.left, BT.left.right).data, 25)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.right.left, BT.right.right).data, 75)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left.left, BT.right.right).data, 50)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.right.left, BT.right.right.left).data, 75)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left.right, BT.left.right).data, 30)
+
 
 if __name__ == '__main__':
     unittest.main()

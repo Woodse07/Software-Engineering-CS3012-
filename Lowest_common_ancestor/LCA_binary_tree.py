@@ -1,57 +1,62 @@
 
 def lowest_common_ancestor_BT(binary_tree, node_a, node_b):
+    flag=0
     if binary_tree is None or node_a is None or node_b is None:
         return None
-
-    if node_a is binary_tree or node_b is binary_tree:
+    if node_a.data is node_b.data:
+        return node_a
+    if binary_tree.data is node_a.data or binary_tree.data is node_b.data:
         return binary_tree
 
-    count_a = 0
-    count_b = 0
+    if node_a.data == binary_tree.data or node_b.data == binary_tree.data:
+        flag=1
 
-    hold_a = node_a
-    while hold_a is not binary_tree:
-        count_a += 1
-        #print("finding parent of : " + str(hold_a.data))
-        hold_a = parent(binary_tree, hold_a)
+    left_subtree = lowest_common_ancestor_BT(binary_tree.left, node_a, node_b)
+    right_subtree = lowest_common_ancestor_BT(binary_tree.right, node_a, node_b)
 
-    hold_b = node_b
-    while hold_b is not binary_tree:
-        count_b += 1
-        #print("finding parent of : " + str(hold_b.data))
-        hold_b = parent(binary_tree, hold_b)
+    if left_subtree is None and right_subtree is None:
+        if flag==0:
+            return None
+        else:
+            return binary_tree
 
-    if count_a > count_b:
-        hold_a = node_a
-        for i in range (0, count_a-count_b):
-            #print("finding parent of : " + str(hold_a.data))
-            hold_a = parent(binary_tree, hold_a)
+    if left_subtree is not None and right_subtree is not None:
+        return binary_tree
+
+    if left_subtree is None:
+        if flag==1:
+            if (right_subtree.data!=node_a and right_subtree.data!=node_b) or right_subtree.data==binary_tree.data:
+                return right_subtree
+            elif right_subtree.data!=binary_tree.data:
+                return binary_tree
+        else:
+            return right_subtree
     else:
-        hold_b = node_b
-        for i in range(0, count_b-count_a):
-            #print("finding parent of : " + str(hold_b.data))
-            hold_b = parent(binary_tree, hold_b)
-
-    while hold_a.data is not hold_b.data:
-        hold_a = parent(binary_tree, hold_a)
-        hold_b = parent(binary_tree, hold_b)
-
-    return hold_a
+        if flag==1:
+            if (left_subtree.data!=p and left_subtree.data!=node_b) or left_subtree.data==binary_tree.data:
+                return left_subtree
+            elif left_subtree.data!=binary_tree.data:
+                return binary_tree
+        else:
+            return left_subtree
 
 
-def parent(root, node):
-    if root is None or node is None or root.data is node.data:
-        return root
+def parent(binary_tree, node):
+    if binary_tree is None or node is None or binary_tree.data is node.data:
+        print("Parent: " + str(binary_tree.data))
+        return binary_tree
 
     else:
 
-        if root.left is not None and root.left.data is node.data:
-            return root
-        elif root.right is not None and root.right.data is node.data:
-            return root
+        if binary_tree.left is not None and binary_tree.left.data is node.data:
+            print("Parent: " + str(binary_tree.data))
+            return binary_tree
+        elif binary_tree.right is not None and binary_tree.right.data is node.data:
+            print("Parent: " + str(binary_tree.data))
+            return binary_tree
 
         else:
-            if root.data < node.data:
-                return parent(root.right, node)
+            if binary_tree.data < node.data:
+                return parent(binary_tree.right, node)
             else:
-                return parent(root.left, node)
+                return parent(binary_tree.left, node)
