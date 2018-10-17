@@ -8,6 +8,7 @@ def lowest_common_ancestor_BT(binary_tree, node_a, node_b):
     if binary_tree.data is node_a.data or binary_tree.data is node_b.data:
         return binary_tree
 
+
     if node_a.data == binary_tree.data or node_b.data == binary_tree.data:
         flag=1
 
@@ -39,24 +40,3 @@ def lowest_common_ancestor_BT(binary_tree, node_a, node_b):
                 return binary_tree
         else:
             return left_subtree
-
-
-def parent(binary_tree, node):
-    if binary_tree is None or node is None or binary_tree.data is node.data:
-        print("Parent: " + str(binary_tree.data))
-        return binary_tree
-
-    else:
-
-        if binary_tree.left is not None and binary_tree.left.data is node.data:
-            print("Parent: " + str(binary_tree.data))
-            return binary_tree
-        elif binary_tree.right is not None and binary_tree.right.data is node.data:
-            print("Parent: " + str(binary_tree.data))
-            return binary_tree
-
-        else:
-            if binary_tree.data < node.data:
-                return parent(binary_tree.right, node)
-            else:
-                return parent(binary_tree.left, node)
