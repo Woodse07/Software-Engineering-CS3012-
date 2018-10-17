@@ -6,7 +6,7 @@ from LCA_binary_tree import parent
 from binary_tree import Node
 
 class myTest(unittest.TestCase):
-    def test_general_lca(self):
+    def test_dag_lca(self):
         #Creating graph with networkx library..
         G = nx.DiGraph()
         #Adding random nodes..
@@ -24,7 +24,7 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor_DAG(G, 'i', 'j'), 'd')          #           / \  /\    /     \
         self.assertEqual(lowest_common_ancestor_DAG(G, 'i', 'd'), 'd')          #          h  j k  l  m       o
         self.assertEqual(lowest_common_ancestor_DAG(G, 'p', 'c'), 'c')          #         /          /         \
-                                                                            #        i          n           p
+                                                                                #        i          n           p
 
     def test_special_lca(self):
         #Creating graph with networkx library..
@@ -119,6 +119,16 @@ class myTest(unittest.TestCase):
         self.assertEqual(parent(BT, BT.left.left), BT.left)
         self.assertEqual(parent(BT, BT.left.left.left), BT.left.left)
 
+    def test_bt_lca(self):
+        BT = Node(50)                  #                50
+        BT.insert(25)                  #               /  \
+        BT.insert(75)                  #             25   75
+        BT.insert(30)                  #            / \   / \
+        BT.insert(100)                 #           0  30 60 100
+        BT.insert(80)                  #            \       /
+        BT.insert(20)                  #             20    80
+        BT.insert(30)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left, BT.right).data, 50)
 
 if __name__ == '__main__':
     unittest.main()
