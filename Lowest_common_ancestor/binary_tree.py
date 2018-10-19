@@ -1,4 +1,3 @@
-from LCA_binary_tree import parent
 class Node:
 
     def __init__(self, data):

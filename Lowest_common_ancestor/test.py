@@ -2,7 +2,6 @@ import unittest
 import networkx as nx
 from LCA_directed_acyclic_graph import lowest_common_ancestor_DAG
 from LCA_binary_tree import lowest_common_ancestor_BT
-from LCA_binary_tree import parent
 from binary_tree import Node
 
 class myTest(unittest.TestCase):
@@ -107,17 +106,6 @@ class myTest(unittest.TestCase):
         BT.insert(2)
         self.assertEqual(BT.left.left.data, 2)
         self.assertEqual(BT.right.right.data, 25)
-
-    def test_parent_function(self):
-        BT = Node(10)
-        BT.insert(5)
-        BT.insert(15)
-        self.assertEqual(parent(BT, BT.left), BT)
-
-        BT.insert(2)
-        BT.insert(1)
-        self.assertEqual(parent(BT, BT.left.left), BT.left)
-        self.assertEqual(parent(BT, BT.left.left.left), BT.left.left)
 
     def test_bt_lca(self):
         BT = Node(50)                  #                50
