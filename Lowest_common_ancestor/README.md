@@ -1,11 +1,26 @@
 ## First Assignment
-**To use LCA function**
-1.  Create graph with networkx library.
-2.  lowest_common_ancestor(Graph, a, b).. where 'a' and 'b' are the nodes you want to find the lowest common ancestor of.
+** LCA Binary Tree Function **
+* Parameters: (root, node_a, node_b)
+  * Where:
+           Root: is the root of the binary tree that contains node_a and node_b.
+           node_a: is a node of the binary tree.
+           node_b: is a node of the binary tree.
+
+* Description: This function will return the lowest common ancestor of node_a and node_b in the binary tree given.
 
 
-**To run tests:**
-1.  Run 'python test.py'
+** LCA Directed Acyclic Graph Function **
+* Parameters: (graph, a, b)
+  * Where:
+          Graph: is a NetworkX Directed Graph object.
+          A: is a node in the Graph.
+          B: is a node in the Graph.
 
+* Description: This function will return the lowest common ancestor of A and B in the directed acyclic graph given.
 
-testing checkout..
+** binary_tree.py **
+* Just a class for creating the binary tree.
+
+** test.py **
+* A series of unit tests for the LCA functions, made with the unittest library.
+* To run these tests: 'python test.py'
