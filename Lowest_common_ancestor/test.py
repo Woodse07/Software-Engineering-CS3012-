@@ -16,6 +16,7 @@ class myTest(unittest.TestCase):
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
         #General cases (Random nodes for testing)                           #       Graphic of the is_directed_acyclic_graph
+        self.assertTrue(nx.is_directed_acyclic_graph)
         self.assertEqual(lowest_common_ancestor_DAG(G, 'p', 'i'), 'a')          #                  _a_
         self.assertEqual(lowest_common_ancestor_DAG(G, 'n', 'o'), 'c')          #                /    \__
         self.assertEqual(lowest_common_ancestor_DAG(G, 'b', 'c'), 'a')          #                b       c__
@@ -36,6 +37,7 @@ class myTest(unittest.TestCase):
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
 
         #Special cases (if one of the nodes is root, the LCA is the root)
+        self.assertTrue(nx.is_directed_acyclic_graph)
         self.assertEqual(lowest_common_ancestor_DAG(G, 'a', 'b'), 'a')
         #LCA of nodes x and x is x
         self.assertEqual(lowest_common_ancestor_DAG(G, 'a', 'a'), 'a')
@@ -74,7 +76,7 @@ class myTest(unittest.TestCase):
         #Adding random edges..
         G.add_edges_from([('a','b'),('a','c'),('b','d'),('b','e'),('c','f'),('c','g'),('d','h'),
                             ('d','j'),('e','k'),('e','l'),('f','m'),('g','o'),('h','i'),('m','n'),('o','p'),])
-
+        self.assertTrue(nx.is_directed_acyclic_graph)
         self.assertEqual(lowest_common_ancestor_DAG(G, 1, 2), None)
         self.assertEqual(lowest_common_ancestor_DAG(G, 'x', 'z'), None)
         self.assertEqual(lowest_common_ancestor_DAG(G, 'w', 'y'), None)
@@ -151,7 +153,10 @@ class myTest(unittest.TestCase):
         BT = True
         self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
 
-
+    def test_node_exists_BT(self):
+        BT = Node(10)
+        BT.insert(5)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT.left, BT.right), None)
 
 
 
