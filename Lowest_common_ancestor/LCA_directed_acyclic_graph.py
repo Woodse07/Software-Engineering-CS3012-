@@ -1,7 +1,7 @@
 import networkx as nx
 
 #Start functions
-def lowest_common_ancestor(graph, a, b):
+def lowest_common_ancestor_DAG(graph, a, b):
     if(not isinstance(graph, nx.DiGraph)):
         print("First parameter is expected to be a networkx Digraph.")
         return None
