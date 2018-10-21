@@ -5,6 +5,7 @@ from LCA_binary_tree import lowest_common_ancestor_BT
 from binary_tree import Node
 
 class myTest(unittest.TestCase):
+    # TESTS FOR DIRECTED ACYCLIC GRAPH #
     def test_dag_lca(self):
         #Creating graph with networkx library..
         G = nx.DiGraph()
@@ -94,13 +95,17 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor_DAG(G, 'd', 'c'), 'a')
         self.assertEqual(lowest_common_ancestor_DAG(G, 'f', 'f'), 'f')
 
+
+
+    # TESTS FOR BINARY TREE #
+
     def test_binary_tree(self):
-        BT = Node(10)
-        BT.insert(5)
-        BT.insert(15)
-        self.assertEqual(BT.data, 10)
-        self.assertEqual(BT.left.data, 5)
-        self.assertEqual(BT.right.data, 15)
+        BT = Node(10)                           #           10
+        BT.insert(5)                            #          / \
+        BT.insert(15)                           #         5   15
+        self.assertEqual(BT.data, 10)           #
+        self.assertEqual(BT.left.data, 5)       #
+        self.assertEqual(BT.right.data, 15)     #
 
         BT.insert(25)
         BT.insert(2)
@@ -126,6 +131,16 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor_BT(BT, BT.left.left, BT.right.right).data, 50)
         self.assertEqual(lowest_common_ancestor_BT(BT, BT.right.left, BT.right.right.left).data, 75)
         self.assertEqual(lowest_common_ancestor_BT(BT, BT.left.right, BT.left.right).data, 30)
+
+    def test_empy_binary_tree(self):
+        self.assertEqual(lowest_common_ancestor_BT(None, None, None), None)
+
+        BT = Node(None)
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
+        self.assertEqual(lowest_common_ancestor_BT(BT, None, None), None)
+        self.assertEqual(lowest_common_ancestor_BT(None, BT, None), None)
+        self.assertEqual(lowest_common_ancestor_BT(None, None, BT), None)
+
 
 
 if __name__ == '__main__':
