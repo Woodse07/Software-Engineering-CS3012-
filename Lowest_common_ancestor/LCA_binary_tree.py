@@ -1,7 +1,9 @@
-
+import binary_tree as BT
 def lowest_common_ancestor_BT(binary_tree, node_a, node_b):
     flag=0
     if binary_tree is None or node_a is None or node_b is None:
+        return None
+    if(not isinstance(binary_tree, BT.Node) or not isinstance(node_a, BT.Node) or not isinstance(node_b, BT.Node)):
         return None
     if binary_tree.data is None or node_a.data is None or node_b.data is None:
         return None

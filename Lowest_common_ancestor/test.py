@@ -141,6 +141,18 @@ class myTest(unittest.TestCase):
         self.assertEqual(lowest_common_ancestor_BT(None, BT, None), None)
         self.assertEqual(lowest_common_ancestor_BT(None, None, BT), None)
 
+    def test_wrong_parameters_BT(self):
+        BT = "Hello World"
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
+        BT = 5
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
+        BT = 2.5
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
+        BT = True
+        self.assertEqual(lowest_common_ancestor_BT(BT, BT, BT), None)
+
+
+
 
 
 if __name__ == '__main__':
