@@ -20,7 +20,11 @@ for branch in repo.get_branches():
 	print(branch)
 print("")
 print("Authors and Dates of all commits of " + user.name + "'s Software Engineering Repo: ")
+count = 0
 for commit in repo.get_commits():
 	print(commit.commit.author)
 	print(commit.commit.author.date)
+	print("")
+	count += 1
+print("Total amount of commits: " + str(count))
 
