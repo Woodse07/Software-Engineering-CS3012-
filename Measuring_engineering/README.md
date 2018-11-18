@@ -1,2 +1,2 @@
 
-Never tried LaTex before so thought I'd give it a go.
+Never tried LaTeX before so thought I'd give it a go.
