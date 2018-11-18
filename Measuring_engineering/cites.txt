@@ -1,0 +1,8 @@
+[1] https://www.quora.com/How-should-a-software-engineers-productivity-be-measured
+[2] https://medium.com/@yupyork/the-best-developer-performance-metrics-6295ea8d87c0
+[3] https://en.wikipedia.org/wiki/Technical_debt
+[4] https://dzone.com/articles/what-technical-debt-it-and-how-to-calculate-it
+[5] https://www.gitprime.com/product/
+[6] https://economictimes.indiatimes.com/definition/software-engineering
+[7] https://stackify.com/track-software-metrics/
+[8] https://en.wikipedia.org/wiki/Machine_learning
