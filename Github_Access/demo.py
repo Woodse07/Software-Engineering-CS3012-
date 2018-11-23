@@ -1,6 +1,6 @@
 from github import Github
 
-g = Github("88f11ca4cc7ef28fa09b46f09062b83648e64e26") #(Username, password) or (Authentication_token) goes here
+g = Github("") #(Username, password) or (Authentication_token) goes here
 
 user = g.get_user()
 user.login
