@@ -17,8 +17,24 @@ def find_match_bfs(graph, user, goal):
 			queue.append(new_path)
 	return 0
 
-def find_match_dfs(graph, user, goal):
-	print("hello")
+def __find_match_dfs(graph, current, goal, visited):
+	if current == goal.login:
+		return [current]
+	
+	if graph.has_node(current):
+		for neighbor in graph.neighbors(current):
+			if neighbor not in visited:
+				visited.add(neighbor)
+				path = __find_match_dfs(graph, neighbor, goal, visited)
+
+				if path is not None:
+					path.insert(0, current)
+					return path
+
+def find_match_dfs(graph, user, goal):	
+	visited = set()
+	visited.add(user.login)
+	return __find_match_dfs(graph, user.login, goal, visited)
 
 #LOGGING IN THE USER
 Username = raw_input("Github Username: ")
@@ -39,8 +55,9 @@ G = nx.read_gml("network.gml")
 while(1):
 	person_of_interest = raw_input("Who are you looking for? ")
 	poi = g.get_user(person_of_interest)
-	r = find_match_bfs(G, user, poi)
+	r = find_match_dfs(G, user, poi)
 	if r is not 0:
+		print(r)
 		print("")
 		print("Found a match!")
 		print("Degree of seperation: " + str(len(r)))
