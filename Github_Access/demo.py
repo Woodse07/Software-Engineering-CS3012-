@@ -1,8 +1,12 @@
 from github import Github
 
+<<<<<<< HEAD
 Username = raw_input("Github Username: ")
 Password = raw_input("Github Password: ")
 g = Github(Username, Password) #(Username, password) or (Authentication_token) goes here
+=======
+g = Github("") #(Username, password) or (Authentication_token) goes here
+>>>>>>> 0335faf8ccb3b96230cb33d33282c51033982d36
 
 user = g.get_user()
 user.login
