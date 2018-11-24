@@ -3,10 +3,10 @@ import getpass
 import networkx as nx
 
 def find_match_bfs(graph, user, goal):
-
 	queue = []
 	queue.append([user.login])
 	while queue:
+		print(level)
 		path = queue.pop(0)
 		node = path[-1]
 		if node == goal.login:
@@ -55,7 +55,7 @@ G = nx.read_gml("network.gml")
 while(1):
 	person_of_interest = raw_input("Who are you looking for? ")
 	poi = g.get_user(person_of_interest)
-	r = find_match_dfs(G, user, poi)
+	r = find_match_bfs(G, user, poi)
 	if r is not 0:
 		print(r)
 		print("")
