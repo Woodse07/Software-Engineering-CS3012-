@@ -31,14 +31,12 @@
 </style>
 <body bgcolor="black">
 
+	<font color="white">(The network that's being searched for matches is 4 levels, deep , but it's far too big to display.)<br/></font>
+	<a href=# id=test><button>Load your Network(3 levels deep)</button></a>
+
 	
-	<a href=# id=test><button> Load your Network(3 levels deep)</button></a>
-
-
-	<form action="/" method="POST">
-		<input type="text" name="name">
-		<input type="submit" name="get_path" value="Find match!">
-	</form>
+	<input id="name" type="text">
+	<a href=# id=test2><button>Find match!</button></a>
 
 
 </body>
@@ -46,7 +44,7 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
 
@@ -81,13 +79,23 @@ $(function() {
   });
 });
 
-function test(data) {
- var link = document.createElement('a');
-link.download = 'data.json';
-var blob = new Blob([data], {type: 'text/plain'});
-link.href = window.URL.createObjectURL(blob);
-link.click();
-}
+
+
+$(function() {
+  $('a#test2').bind('click', function() {
+	data = document.getElementById("name").value;
+	keyData = {name:"Tin97"}
+	console.log(name);
+    $.post('/get_match?name='+data,keyData,
+        function(data) {
+      	console.log(data);
+    });
+
+
+    return false;
+  });
+});
+
   
 function drawGraph(graph) {
 	//d3.json(graphPath, function(error, graph) {

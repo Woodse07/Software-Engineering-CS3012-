@@ -1,7 +1,6 @@
 from github import Github
 import getpass
 import networkx as nx
-from networkx.readwrite import json_graph
 
 def find_match_bfs(graph, user, goal):
 	visited = set()
@@ -41,22 +40,25 @@ def find_match_bfs(graph, user, goal):
 #	visited.add(user.login)
 #	return __find_match_dfs(graph, user.login, goal, visited)
 
+#LOGGING IN THE USER
+Username = raw_input("Github Username: ")
+Password = getpass.getpass("Github Password: ")
+g = Github(Username, Password) #(Username, password) or (Authentication_token) goes here
+user = g.get_user()
+user.login
+print("Successfully logged in user " + user.name)
+print("")
 
-def findMatch(Username, Password, person_of_interest):
-	#LOGGING IN THE USER
-	g = Github(Username, Password) #(Username, password) or (Authentication_token) goes here
-	user = g.get_user()
-	user.login
-	print("Successfully logged in user " + user.name)
+#FETCHING PRE-CONSTRUCTED NETWORK
+print("Fetching pre-constructed network...")
+print("")
+G = nx.DiGraph()
+G = nx.read_gml("med_network.gml")
+
+#FINDING LINK BETWEEN USER AND PERSON OF INTEREST
+while(1):
+	person_of_interest = raw_input("Who are you looking for? ")
 	print("")
-
-	#FETCHING PRE-CONSTRUCTED NETWORK
-	print("Fetching pre-constructed network...")
-	print("")
-	G = nx.DiGraph()
-	G = nx.read_gml("networks/med_network.gml")
-
-	#FINDING LINK BETWEEN USER AND PERSON OF INTEREST
 	poi = g.get_user(person_of_interest)
 	r = find_match_bfs(G, user, poi)
 	if r is not 0:
@@ -64,14 +66,8 @@ def findMatch(Username, Password, person_of_interest):
 		print("Degree of seperation: " + str(len(r)))
 		print("Path from " + user.login + " to " + poi.login + ": ")
 		path = ""
-		graph = nx.DiGraph()
-		for i in range(0, len(r)):
-			graph.add_node(r[i])
-			if i+1 < len(r):
-				graph.add_edge(r[i], r[i+1])
-			path += r[i] + " -> "
+		for element in r:
+			path += element + " -> "
 		print(path[:-4])
-		return str(json_graph.node_link_data(graph))
-
 	else:
-		return("No match found :(")
+		print("No match found :(")
