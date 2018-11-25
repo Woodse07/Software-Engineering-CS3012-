@@ -12,7 +12,7 @@ user.login
 print("Successfully logged in user " + user.name)
 print("")
 
-#CONSTRUCTING NETWORK FOR USER 3 LEVELS DEEP
+#CONSTRUCTING NETWORK FOR USER 4 LEVELS DEEP
 print("Please allow time for the network to be constructed..")
 G = nx.DiGraph()
 G.add_node(user.login)
@@ -29,13 +29,23 @@ for follower in followers:
 			childrenSet.add(child.login)
 			G.add_node(child.login)
 			G.add_edge(follower.login, child.login)
-	#		grandchildren = g.get_user(child.login).get_followers()
-	#	for grandchild in grandchildren:
-	#		if grandchild.login not in followerSet and grandchild.login not in childrenSet and grandchild.login != user.login:
-	#			G.add_node(grandchild.login)
-	#			G.add_edge(child.login, grandchild.login)
+			grandchildren = g.get_user(child.login).get_followers()
+			grandchildrenSet = set()
+			for grandchild in grandchildren:
+				if grandchild.login not in followerSet and grandchild.login not in childrenSet and grandchild.login != user.login:
+					grandchildrenSet.add(grandchild.login)
+					G.add_node(grandchild.login)
+					G.add_edge(child.login, grandchild.login)
+					#grandgrandchildren = g.get_user(grandchild.login).get_followers()
+					#for grandgrandchild in grandgrandchildren:
+					#	if grandgrandchild.login not in followerSet and grandgrandchild.login not in childrenSet and grandgrandchild.login not in grandchildrenSet and grandgrandchild.login != user.login:
+					#		print(grandgrandchild.login)
+					#		G.add_node(grandgrandchild.login)
+					#		G.add_edge(grandchild.login, grandgrandchild.login)
+			
+				
 
-nx.write_gml(G,"smallnetwork.gml")
+nx.write_gml(G,"med_network.gml")
 			
 		
 

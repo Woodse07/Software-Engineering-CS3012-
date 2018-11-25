@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import re
 
 def gml_sub(blob):
 
@@ -33,8 +34,11 @@ def main(graphfile):
 	nodes = blob.split('edge')[0]
 	edges = ''.join(blob.split('edge')[1:]).strip().rstrip(']')
 
-	F = open("smallnetwork.json", 'w')
+	F = open("med_network.json", 'w')
 	nodes = gml_sub(nodes)
+	nodes = re.sub(r'([a-zA-Z]+)("id":)([a-zA-Z]+)', r'\1id\3', nodes)
+	nodes = re.sub(r'([a-zA-Z]+)("id":)', r'\1id', nodes)
+	nodes = re.sub(r'(""source":)([a-zA-z]+)', r'"\2', nodes)
 	edges = gml_sub(edges)
 	F.write ('{\n  "nodes":[')
 	F.write (nodes.rstrip(','))

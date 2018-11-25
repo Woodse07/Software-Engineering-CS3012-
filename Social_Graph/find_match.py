@@ -3,37 +3,45 @@ import getpass
 import networkx as nx
 
 def find_match_bfs(graph, user, goal):
+	visited = set()
 	queue = []
 	queue.append([user.login])
+	visited.add(user.login)
+	count = 0
 	while queue:
+		print(count)
+		count+=1
 		path = queue.pop(0)
 		node = path[-1]
 		if node == goal.login:
 			return path
 		for follower in graph.neighbors(node):
-			new_path = list(path)
-			new_path.append(follower)
-			queue.append(new_path)
+			if follower not in visited:
+				new_path = list(path)
+				new_path.append(follower)
+				queue.append(new_path)
+				visited.add(follower)
 	return 0
 
-def __find_match_dfs(graph, current, goal, visited):
-	if current == goal.login:
-		return [current]
-	
-	if graph.has_node(current):
-		for neighbor in graph.neighbors(current):
-			if neighbor not in visited:
-				visited.add(neighbor)
-				path = __find_match_dfs(graph, neighbor, goal, visited)
 
-				if path is not None:
-					path.insert(0, current)
-					return path
-
-def find_match_dfs(graph, user, goal):	
-	visited = set()
-	visited.add(user.login)
-	return __find_match_dfs(graph, user.login, goal, visited)
+#def __find_match_dfs(graph, current, goal, visited):
+#	if current == goal.login:
+#		return [current]
+#	
+#	if graph.has_node(current):
+#		for neighbor in graph.neighbors(current):
+#			if neighbor not in visited:
+#				visited.add(neighbor)
+#				path = __find_match_dfs(graph, neighbor, goal, visited)
+#
+#				if path is not None:
+#					path.insert(0, current)
+#					return path
+#
+#def find_match_dfs(graph, user, goal):	
+#	visited = set()
+#	visited.add(user.login)
+#	return __find_match_dfs(graph, user.login, goal, visited)
 
 #LOGGING IN THE USER
 Username = raw_input("Github Username: ")
