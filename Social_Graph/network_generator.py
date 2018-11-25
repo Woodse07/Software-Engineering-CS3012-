@@ -13,6 +13,7 @@ print("Successfully logged in user " + user.name)
 print("")
 
 #CONSTRUCTING NETWORK FOR USER 4 LEVELS DEEP
+#** THIS IS FAR AS I CAN GO WITHOUT EXCEEDING THE API RATE LIMIT
 print("Please allow time for the network to be constructed..")
 G = nx.DiGraph()
 G.add_node(user.login)

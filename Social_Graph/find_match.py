@@ -7,10 +7,7 @@ def find_match_bfs(graph, user, goal):
 	queue = []
 	queue.append([user.login])
 	visited.add(user.login)
-	count = 0
 	while queue:
-		print(count)
-		count+=1
 		path = queue.pop(0)
 		node = path[-1]
 		if node == goal.login:
@@ -56,16 +53,15 @@ print("")
 print("Fetching pre-constructed network...")
 print("")
 G = nx.DiGraph()
-G = nx.read_gml("network.gml")
+G = nx.read_gml("med_network.gml")
 
 #FINDING LINK BETWEEN USER AND PERSON OF INTEREST
 while(1):
 	person_of_interest = raw_input("Who are you looking for? ")
+	print("")
 	poi = g.get_user(person_of_interest)
 	r = find_match_bfs(G, user, poi)
 	if r is not 0:
-		print(r)
-		print("")
 		print("Found a match!")
 		print("Degree of seperation: " + str(len(r)))
 		print("Path from " + user.login + " to " + poi.login + ": ")
