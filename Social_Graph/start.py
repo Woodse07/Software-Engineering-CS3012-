@@ -4,6 +4,7 @@ from flask import request
 from flask import render_template
 import getpass
 import find_match
+import gml2json
 
 app = Flask(__name__)
 
@@ -15,7 +16,8 @@ def get_path():
 def get_path_post():
 	name = request.args.get("name")
 	print(name)
-	return find_match.findMatch(Username, Password, name)
+	print(find_match.findMatch(Username, Password, name))
+	return gml2json.main("temp.gml")
 
 @app.route('/get_network/', methods=['GET'])
 def get_network_post():

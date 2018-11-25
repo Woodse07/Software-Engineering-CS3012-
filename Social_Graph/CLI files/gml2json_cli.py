@@ -34,18 +34,18 @@ def main(graphfile):
 	nodes = blob.split('edge')[0]
 	edges = ''.join(blob.split('edge')[1:]).strip().rstrip(']')
 
-	ret = ""
+	F = open("med_network.json", 'w')
 	nodes = gml_sub(nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)([a-zA-Z]+)', r'\1id\3', nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)', r'\1id', nodes)
 	nodes = re.sub(r'(""source":)([a-zA-z]+)', r'"\2', nodes)
 	edges = gml_sub(edges)
-	ret += ('{\n  "nodes":[')
-	ret += (nodes.rstrip(','))
-	ret += ('  ],\n  "edges":[')
-	ret += ('    ' + edges.rstrip(','))
-	ret += ('  ]\n}\n')
-	return ret
+	F.write ('{\n  "nodes":[')
+	F.write (nodes.rstrip(','))
+	F.write ('  ],\n  "edges":[')
+	F.write ('    ' + edges.rstrip(','))
+	F.write ('  ]\n}\n')
+	F.close()
 
 if __name__ == '__main__':
 	main(sys.argv[1])

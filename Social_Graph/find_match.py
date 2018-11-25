@@ -70,8 +70,8 @@ def findMatch(Username, Password, person_of_interest):
 			if i+1 < len(r):
 				graph.add_edge(r[i], r[i+1])
 			path += r[i] + " -> "
-		print(path[:-4])
-		return str(json_graph.node_link_data(graph))
+		nx.write_gml(graph, "temp.gml")
+		return(path[:-4])
 
 	else:
 		return("No match found :(")

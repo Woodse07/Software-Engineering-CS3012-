@@ -85,10 +85,10 @@ $(function() {
   $('a#test2').bind('click', function() {
 	data = document.getElementById("name").value;
 	keyData = {name:"Tin97"}
-	console.log(name);
     $.post('/get_match?name='+data,keyData,
         function(data) {
-      	console.log(data);
+			console.log(data);
+      		drawGraph(JSON.parse(data));
     });
 
 
