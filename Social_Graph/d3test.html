@@ -25,7 +25,7 @@ var svg = d3.select("body").append("svg")
 
 var force = d3.layout.force()
     .gravity(0.05)
-    .distance(200)
+    .distance(300)
     .charge(-200)
     .size([width, height]);
 
@@ -52,8 +52,8 @@ d3.json("smallnetwork.json", function(error, json) {
       .attr("xlink:href", "https://github.com/favicon.ico")
       .attr("x", -8)
       .attr("y", -8)
-      .attr("width", 16)
-      .attr("height", 16);
+      .attr("width", function(d){ if(d.label == "Woodse07") return 64; else return 16;})
+      .attr("height", function(d){ if(d.label == "Woodse07") return 64; else return 16;});
 
   node.append("text")
       .attr("dx", 12)

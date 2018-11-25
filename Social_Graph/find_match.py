@@ -6,7 +6,6 @@ def find_match_bfs(graph, user, goal):
 	queue = []
 	queue.append([user.login])
 	while queue:
-		print(level)
 		path = queue.pop(0)
 		node = path[-1]
 		if node == goal.login:
