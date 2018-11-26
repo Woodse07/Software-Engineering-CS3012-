@@ -21,7 +21,7 @@ def gml_sub(blob):
     blob = blob.replace('\n}', '}')
     return blob.strip('\n')
 
-def main(graphfile):
+def main(graphfile, outfile):
     """
     Converts GraphML file to json
     Usage:
@@ -34,7 +34,7 @@ def main(graphfile):
 	nodes = blob.split('edge')[0]
 	edges = ''.join(blob.split('edge')[1:]).strip().rstrip(']')
 
-	F = open("smallnetwork.json", 'w')
+	F = open(outfile, 'w')
 	nodes = gml_sub(nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)([a-zA-Z]+)', r'\1id\3', nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)', r'\1id', nodes)
@@ -48,4 +48,4 @@ def main(graphfile):
 	F.close()
 
 if __name__ == '__main__':
-	main(sys.argv[1])
+	main(sys.argv[1], sys.argv[2])
