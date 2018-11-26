@@ -68,3 +68,16 @@ Program that prompts the user to login, and will generate a network of their fri
 
   * Click and Drag Nodes:
     * The ability to drag nodes and place it in  fixed location. Good for spacing out the graph if it's a little cluttered.
+
+  * Colour & Size:
+    * The colour and size of the nodes represent the level of them. The largest red node is the logged in user. The slightly smaller and orange nodes are the users friends, and the smallest yellow nodes are the users friends friends. This makes it very clear whats what when you look at the graph, without having to hover over each node.
+
+
+* **Example**
+  * Graph from 'Load your network' button: ![Graph](images/graph.png)
+
+  * Graph when you hover on a node: ![Graph](images/hover.png)
+
+  * Graph when you drag a node: ![Graph](images/dragging.png)
+
+  * Graph when Username is searched: ![Graph](images/search.png)
