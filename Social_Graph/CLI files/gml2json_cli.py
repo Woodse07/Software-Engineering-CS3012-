@@ -15,7 +15,7 @@ def gml_sub(blob):
     blob = blob.replace(']\n', '},\n')
     blob = blob.replace('[\n', '{')
     blob = blob.replace('\n{', '\n    {')
-    for s in ['id', 'label', 'source', 'target', 'value']:
+    for s in ['id', 'label', 'source', 'target', 'value', 'level']:
         blob = blob.replace(s, '"%s":' % s)
     blob = blob.replace('\n"', ', "')
     blob = blob.replace('\n}', '}')
@@ -34,7 +34,7 @@ def main(graphfile):
 	nodes = blob.split('edge')[0]
 	edges = ''.join(blob.split('edge')[1:]).strip().rstrip(']')
 
-	F = open("med_network.json", 'w')
+	F = open("smallnetwork.json", 'w')
 	nodes = gml_sub(nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)([a-zA-Z]+)', r'\1id\3', nodes)
 	nodes = re.sub(r'([a-zA-Z]+)("id":)', r'\1id', nodes)

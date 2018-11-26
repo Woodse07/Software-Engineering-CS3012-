@@ -17,11 +17,13 @@ print("")
 print("Please allow time for the network to be constructed..")
 G = nx.DiGraph()
 G.add_node(user.login)
+G.node[user.login]['level'] = 1
 followers = user.get_followers()
 followerSet = set()
 for follower in followers:
 	followerSet.add(follower.login)
 	G.add_node(follower.login)
+	G.node[follower.login]['level'] = 2
 	G.add_edge(user.login, follower.login)
 	children = g.get_user(follower.login).get_followers()
 	childrenSet = set()
@@ -29,8 +31,10 @@ for follower in followers:
 		if child.login not in followerSet and child.login != user.login:	
 			childrenSet.add(child.login)
 			G.add_node(child.login)
+			G.node[child.login]['level'] = 3
 			G.add_edge(follower.login, child.login)
-			grandchildren = g.get_user(child.login).get_followers()
+			print child.login
+			#grandchildren = g.get_user(child.login).get_followers()
 			#grandchildrenSet = set()
 			#for grandchild in grandchildren:
 			#	if grandchild.login not in followerSet and grandchild.login not in childrenSet and grandchild.login != user.login:
@@ -46,7 +50,7 @@ for follower in followers:
 			
 				
 
-nx.write_gml(G,"med_network.gml")
+nx.write_gml(G,"smallnetwork.gml")
 			
 		
 

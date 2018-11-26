@@ -67,6 +67,7 @@ def findMatch(Username, Password, person_of_interest):
 		graph = nx.DiGraph()
 		for i in range(0, len(r)):
 			graph.add_node(r[i])
+			graph.node[r[i]]['level'] = i+1
 			if i+1 < len(r):
 				graph.add_edge(r[i], r[i+1])
 			path += r[i] + " -> "

@@ -3,17 +3,14 @@ graph [
   node [
     id 0
     label "Woodse07"
-    level 1
   ]
   node [
     id 1
     label "sullaVM"
-    level 3
   ]
   node [
     id 2
     label "slow-J"
-    level 2
   ]
   edge [
     source 0

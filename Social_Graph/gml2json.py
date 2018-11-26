@@ -15,7 +15,7 @@ def gml_sub(blob):
     blob = blob.replace(']\n', '},\n')
     blob = blob.replace('[\n', '{')
     blob = blob.replace('\n{', '\n    {')
-    for s in ['id', 'label', 'source', 'target', 'value']:
+    for s in ['id', 'label', 'source', 'target', 'value', 'level']:
         blob = blob.replace(s, '"%s":' % s)
     blob = blob.replace('\n"', ', "')
     blob = blob.replace('\n}', '}')
