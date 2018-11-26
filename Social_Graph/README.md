@@ -3,6 +3,7 @@
 Program that prompts the user to login, and will generate a network of their friends, friends of their friends etc. The user can then choose to view a graph of their network, or search for someone on github using their username. The program will then use BFS to scan their network (Option to use DFS), and will return the path(Displayed as a force directed graph) from the user to that person through their network. **note the network that is being searched is only 4 levels deep, going beyond this will exceed the github API rate limit, also the network being displayed is only 3 levels deep, since d3 can't handle the size of the graph at 4 levels.**
 
 <h4> Instructions: </h4>
+
 * Run setup.sh `./setup.sh` if an error about permissions come up, just execute `chmod a+rx setup.sh` beforehand.
   * This will install flask, execute the network generator(this takes time), and spin up flask. You should now be able to view your network on localhost:5000, or whatever url is displayed in the terminal.
 
@@ -11,6 +12,7 @@ Program that prompts the user to login, and will generate a network of their fri
 
 
 <h4> File Descriptions: </h4>
+
 * **setup.sh**
   * Executes necessary commands to get program up and running.
 
@@ -51,3 +53,13 @@ Program that prompts the user to login, and will generate a network of their fri
 
 
 <h4> The Graph: </h4>
+
+* The main graph has 3 levels, level 1 being you, level 2 being your friends, level 3 being your friends friends.
+* The graph being searched has 4 levels, the same as whats being displayed, only with your friends friends friends.
+
+* **Functionality**
+  * Load your network button
+    * Will load the graph of your network down to 3 levels.
+  * Find match button
+    * First enter Username of person you're looking for, then click find match. If they are found, fter a second or two a graph will appear of the path from you to that person.
+    
