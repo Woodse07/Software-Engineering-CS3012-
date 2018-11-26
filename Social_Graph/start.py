@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def get_path():
-	return render_template("d3test2.html")
+	return render_template("index.html")
 
 @app.route('/get_match', methods=['POST'])
 def get_path_post():
@@ -21,7 +21,7 @@ def get_path_post():
 
 @app.route('/get_network/', methods=['GET'])
 def get_network_post():
-	return send_file("smallnetwork/networks.json")
+	return send_file("networks/smallnetwork.json")
 
 if __name__ == '__main__':
 	Username = raw_input("Github Username: ")

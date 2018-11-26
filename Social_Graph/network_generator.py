@@ -31,12 +31,12 @@ for follower in followers:
 			G.add_node(child.login)
 			G.add_edge(follower.login, child.login)
 			grandchildren = g.get_user(child.login).get_followers()
-			grandchildrenSet = set()
-			for grandchild in grandchildren:
-				if grandchild.login not in followerSet and grandchild.login not in childrenSet and grandchild.login != user.login:
-					grandchildrenSet.add(grandchild.login)
-					G.add_node(grandchild.login)
-					G.add_edge(child.login, grandchild.login)
+			#grandchildrenSet = set()
+			#for grandchild in grandchildren:
+			#	if grandchild.login not in followerSet and grandchild.login not in childrenSet and grandchild.login != user.login:
+			#		grandchildrenSet.add(grandchild.login)
+			#		G.add_node(grandchild.login)
+			#		G.add_edge(child.login, grandchild.login)
 					#grandgrandchildren = g.get_user(grandchild.login).get_followers()
 					#for grandgrandchild in grandgrandchildren:
 					#	if grandgrandchild.login not in followerSet and grandgrandchild.login not in childrenSet and grandgrandchild.login not in grandchildrenSet and grandgrandchild.login != user.login:
