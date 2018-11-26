@@ -1,6 +1,7 @@
 #!/bin/bash
 # Setup Script
-
+echo "Installing Flask..."
+pip install Flask
 echo "Calling python script to generate Network..."
 python network_generator.py
 echo "Converting our gml files to json..."
