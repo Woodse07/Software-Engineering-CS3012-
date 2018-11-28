@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+<!-- All the CSS -->
 <style>
 
 	@-webkit-keyframes blackWhite {  
@@ -38,6 +40,8 @@
   }
 
 </style>
+
+<!-- All the HTML, just includes a button to load the graph and a box to enter a Username -->
 <body bgcolor="black">
 
 	<font color="white">(The network that's being searched for matches is 4 levels, deep , but it's far too big to display.)<br/></font>
@@ -56,6 +60,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
+//All The Javascript
 
 
 var color = d3.scaleOrdinal(d3.schemeSet3);
@@ -72,12 +77,13 @@ color(0);
   color(10);
   
   
-
+// Creating tooltip for when you hover over nodes.
 var tooltip = d3.select("body")
 	.append("div")
 	.attr("class", "tooltip")
 	.style("opacity", 0);
 
+// JQuery GET request to flask endpoint when you click the get network button.
 $(function() {
   $('a#test').bind('click', function() {
     $.getJSON('/get_network/',
@@ -90,7 +96,7 @@ $(function() {
 });
 
 
-
+// JQuery POST request to flask endpoint when you enter a Username.
 $(function() {
   $('a#test2').bind('click', function() {
 	data = document.getElementById("name").value;
@@ -106,10 +112,9 @@ $(function() {
   });
 });
 
-  
+// drawGraph takes in JSON of nodes and edges and draws the graph.
 function drawGraph(graph) {
-	//d3.json(graphPath, function(error, graph) {
-	//  if (error) throw error;
+		//Everytime we call this function we want to remove what we've already drawn.
 		d3.selectAll("svg > *").remove();
 
 	 	const svg = d3.select('svg'),
@@ -117,10 +122,7 @@ function drawGraph(graph) {
 	  			height = +svg.attr('height');
 		
 
-	  
-	//  const width = 960;
-	//   const height = 700;
-
+	  // Physics stuff
 	  const simulation = d3.forceSimulation()
 		.nodes(graph.nodes)
 		.force('link', d3.forceLink().id(d => d.id))
@@ -137,11 +139,12 @@ function drawGraph(graph) {
 
 	 
 
-
+	  // Make edges in json links
 	  let link = svg.selectAll('line')
 		.data(graph.edges)
 		.enter().append('line');
 
+	  // Set all attributes and functionality of links here eg mouseover
 	  link  
 		.attr('class', 'link')
 		.style("opacity", 0.6)
@@ -166,7 +169,7 @@ function drawGraph(graph) {
 			    .style("top", (d3.event.pageY + 10) + "px");
 			});
 	;
-
+	  // For nodes in JSON make svg element for node and allow drag functionality.
 	  let node = svg.selectAll('.node')
 		.data(graph.nodes)
 		.enter().append('g')
@@ -176,6 +179,10 @@ function drawGraph(graph) {
 		  .on("drag", dragged)
 		  .on("end", dragended));;
 
+	  // We want to represent our nodes with circles.
+	  // We declare all styling, attributes, functionality of circles here.
+	  // We can vary these per level since we added a level attribute to our json when we 
+	  // were constructing the graphs.
 	  node.append('circle')
 		.attr('r', function(d){console.log(d.level);if(d.level == "1") return 24; 
 				else if(d.level == 2) return R;
@@ -207,12 +214,15 @@ function drawGraph(graph) {
 			})
 	  	.on('dblclick',releasenode)
 		
-		
+	  // Append text to each node.
 	  node.append('text')
 		.attr('x', 0)
 		.attr('dy', '.35em')
-		.text(d => d.name);
+		.attr('fill', 'white')
+		.style('font-size', 'x-small')
+		.text(d => d.label);
 
+	  // For every tick do this
 	  function ticked() {
 		link
 		  .attr('x1', d => d.source.x)
@@ -224,22 +234,27 @@ function drawGraph(graph) {
 		  .attr('transform', d => `translate(${d.x},${d.y})`);
 	  }
 
+	// Function for dragstarted.. not mine
 	function dragstarted(d) {
 	  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
 	  d.fx = d.x;
 	  d.fy = d.y;
 	}
 
+	// Function for dragged.. not mine
 	function dragged(d) {
 	  d.fx = d3.event.x;
 	  d.fy = d3.event.y;
 	}
 
+	// Function for dragended.. not mine
 	function dragended(d) {
 	  if (!d3.event.active) simulation.alphaTarget(0);
 	  //d.fx = null;
 	  //d.fy = null;
 	}
+		
+	// Function for releasenode.. not mine
 	function releasenode(d) {
 		d.fx = null;
 		d.fy = null;
@@ -254,6 +269,7 @@ function drawGraph(graph) {
 		return linkedByIndex[`${a.index},${b.index}`] || linkedByIndex[`${b.index},${a.index}`] || a.index === b.index;
 	  }
 
+	  //Function for when you hover on a node, if node is not connected, blur it out.
 	  function fade(opacity) {
 		return d => {
 		  node.style('stroke-opacity', function (o) {
