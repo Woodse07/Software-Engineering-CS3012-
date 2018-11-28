@@ -2,6 +2,10 @@ from github import Github
 import getpass
 import networkx as nx
 
+# Simple BFS. 
+# Takes in a newtworkX Directed graph, the logged in user, and the Username of
+# the person of interest.
+# Returns the path from the logged in user to the person of interest.
 def find_match_bfs(graph, user, goal):
 	visited = set()
 	queue = []
@@ -20,25 +24,30 @@ def find_match_bfs(graph, user, goal):
 				visited.add(follower)
 	return 0
 
+# DFS, takes in the same parameters and returns the path from user to person_of_interest.
+# Not implemented into the frontend but I thought it might be useful to have this here, 
+# since if the person of interest is very deep into the network, this should find them faster.
+# Admittedly won't make much of a difference for the size of graphs we're dealing with here.
+def __find_match_dfs(graph, current, goal, visited):
+	if current == goal.login:
+		return [current]
+	
+	if graph.has_node(current):
+		for neighbor in graph.neighbors(current):
+			if neighbor not in visited:
+				visited.add(neighbor)
+				path = __find_match_dfs(graph, neighbor, goal, visited)
 
-#def __find_match_dfs(graph, current, goal, visited):
-#	if current == goal.login:
-#		return [current]
-#	
-#	if graph.has_node(current):
-#		for neighbor in graph.neighbors(current):
-#			if neighbor not in visited:
-#				visited.add(neighbor)
-#				path = __find_match_dfs(graph, neighbor, goal, visited)
-#
-#				if path is not None:
-#					path.insert(0, current)
-#					return path
-#
-#def find_match_dfs(graph, user, goal):	
-#	visited = set()
-#	visited.add(user.login)
-#	return __find_match_dfs(graph, user.login, goal, visited)
+				if path is not None:
+					path.insert(0, current)
+					return path
+
+def find_match_dfs(graph, user, goal):	
+	visited = set()
+	visited.add(user.login)
+	return __find_match_dfs(graph, user.login, goal, visited)
+
+# From here on we ask the user for their username and password, and repeatedly ask them for users they want to find, and return to them the path in the form "You -> Your friend -> Your friend's friend"
 
 #LOGGING IN THE USER
 Username = raw_input("Github Username: ")
