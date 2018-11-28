@@ -47,5 +47,9 @@ def main(graphfile, outfile):
 	F.write ('  ]\n}\n')
 	F.close()
 
+
+# Takes in two command line arguments, first is name of gml file, 2nd is name of output file. 
+# Example:
+# python gml2json_cli.py med_network.gml med_network.json
 if __name__ == '__main__':
 	main(sys.argv[1], sys.argv[2])

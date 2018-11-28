@@ -47,5 +47,8 @@ def main(graphfile):
 	ret += ('  ]\n}\n')
 	return ret
 
+# Takes in a command line argument of a gml file, converts it to json and returns it.
+# Example:
+# python gml2json.py temp.gml
 if __name__ == '__main__':
 	main(sys.argv[1])
