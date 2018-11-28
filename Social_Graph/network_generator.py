@@ -12,14 +12,21 @@ user.login
 print("Successfully logged in user " + user.name)
 print("")
 
+
+# Note: I understand this could be implemented a lot nicer, I'll come back to this
 #CONSTRUCTING NETWORK FOR USER 4 LEVELS DEEP
 #** THIS IS FAR AS I CAN GO WITHOUT EXCEEDING THE API RATE LIMIT
 print("Please allow time for the network to be constructed..")
+# Create a directed graph object
 G = nx.DiGraph()
+# Add the logged in user as the root and specify this as level 1
 G.add_node(user.login)
 G.node[user.login]['level'] = 1
+# Get all friends of the user
 followers = user.get_followers()
 followerSet = set()
+# For every friend of the user, maintain a set of followers
+# Add a node of a friend, and connect the user and the friend
 for follower in followers:
 	followerSet.add(follower.login)
 	G.add_node(follower.login)
@@ -27,12 +34,15 @@ for follower in followers:
 	G.add_edge(user.login, follower.login)
 	children = g.get_user(follower.login).get_followers()
 	childrenSet = set()
+	# For every friend of a friend, again, maintain a set, and if the friend of a friend is
+	# the user or any of the users friends, add this node and connect.
 	for child in children:
 		if child.login not in followerSet and child.login != user.login:	
 			childrenSet.add(child.login)
 			G.add_node(child.login)
 			G.node[child.login]['level'] = 3
 			G.add_edge(follower.login, child.login)
+			# This was for testing how much I could do with the API rate limit.
 			#grandchildren = g.get_user(child.login).get_followers()
 			#grandchildrenSet = set()
 			#for grandchild in grandchildren:
@@ -49,6 +59,7 @@ for follower in followers:
 
 nx.write_gml(G,"networks/smallnetwork.gml")
 
+#Refer to comments above.
 G = nx.DiGraph()
 G.add_node(user.login)
 followers = user.get_followers()
