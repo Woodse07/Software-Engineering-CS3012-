@@ -2,8 +2,17 @@
 <meta charset="utf-8">
 <style>
 
+	@-webkit-keyframes blackWhite {  
+  0% { stroke: white; }
+  50% {stroke: grey; }
+  100% { stroke: white; }
+}
+
 	.link {
 	  stroke: #c1c1c1;
+	-webkit-animation-name: blackWhite;  
+    -webkit-animation-iteration-count: infinite;  
+    -webkit-animation-duration: 5s;
     stroke-width: 2px;
     pointer-events: all;
 	}
@@ -171,9 +180,11 @@ function drawGraph(graph) {
 		.attr('r', function(d){console.log(d.level);if(d.level == "1") return 24; 
 				else if(d.level == 2) return R;
 				else if(d.level == 3) return 8})
-	  	.attr("fill", function(d) { if(d.level == 1) return "red"; 
+	  	.attr("fill", function(d) { if(d.level == 1) return "none"; 
 									else if(d.level == 2) return "orange";
 									else if(d.level == 3) return "yellow";}) 
+		.style("stroke", function(d) {if(d.level == 1) return "Red";})
+		.style("stroke-width", function(d) {if(d.level == 1) return 10;})
 		.style("opacity", 0.7)	
 		.on('mouseover.tooltip', function(d) {
 		  	tooltip.transition()
