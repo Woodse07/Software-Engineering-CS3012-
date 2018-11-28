@@ -7,20 +7,20 @@ graph [
   ]
   node [
     id 1
-    label "sullaVM"
-    level 3
+    label "Jarota"
+    level 2
   ]
   node [
     id 2
-    label "slow-J"
-    level 2
+    label "LukeHackett12"
+    level 3
   ]
   edge [
     source 0
-    target 2
+    target 1
   ]
   edge [
-    source 2
-    target 1
+    source 1
+    target 2
   ]
 ]
